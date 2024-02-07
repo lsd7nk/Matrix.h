@@ -1,4 +1,4 @@
-#include "s21_matrix.h"
+#include "matrix.h"
 
 #include <math.h>
 #include <stdlib.h>
@@ -10,7 +10,7 @@ int eq_size_matrix(matrix_t *A, matrix_t *B);
 int check_type_matrix(matrix_t *A);
 void set_type_matrix(matrix_t *A);
 
-matrix_t s21_create_matrix(int rows, int columns) {
+matrix_t create_matrix(int rows, int columns) {
   matrix_t matrixS;
 
   if (rows >= 1 && columns >= 1) {
@@ -39,15 +39,15 @@ matrix_t s21_create_matrix(int rows, int columns) {
   return matrixS;
 }
 
-matrix_t s21_sum_matrix(matrix_t *A, matrix_t *B) {
-  matrix_t matrixS = s21_create_matrix(0, 0);
+matrix_t sum_matrix(matrix_t *A, matrix_t *B) {
+  matrix_t matrixS = create_matrix(0, 0);
 
   if (A != NULL && B != NULL) {
     if (check_type_matrix(A) && check_type_matrix(B)) {
       if (eq_size_matrix(A, B)) {
         int rows = A->rows;
         int columns = A->columns;
-        matrixS = s21_create_matrix(rows, columns);
+        matrixS = create_matrix(rows, columns);
 
         for (int i = 0; i < rows; i++) {
           for (int j = 0; j < columns; j++) {
@@ -63,15 +63,15 @@ matrix_t s21_sum_matrix(matrix_t *A, matrix_t *B) {
   return matrixS;
 }
 
-matrix_t s21_sub_matrix(matrix_t *A, matrix_t *B) {
-  matrix_t matrixS = s21_create_matrix(0, 0);
+matrix_t sub_matrix(matrix_t *A, matrix_t *B) {
+  matrix_t matrixS = create_matrix(0, 0);
 
   if (A != NULL && B != NULL) {
     if (check_type_matrix(A) && check_type_matrix(B)) {
       if (eq_size_matrix(A, B)) {
         int rows = A->rows;
         int columns = A->columns;
-        matrixS = s21_create_matrix(rows, columns);
+        matrixS = create_matrix(rows, columns);
 
         for (int i = 0; i < rows; i++) {
           for (int j = 0; j < columns; j++) {
@@ -87,14 +87,14 @@ matrix_t s21_sub_matrix(matrix_t *A, matrix_t *B) {
   return matrixS;
 }
 
-matrix_t s21_mult_number(matrix_t *A, double number) {
-  matrix_t matrixS = s21_create_matrix(0, 0);
+matrix_t mult_number(matrix_t *A, double number) {
+  matrix_t matrixS = create_matrix(0, 0);
 
   if (A != NULL && !isnan(number)) {
     if (check_type_matrix(A)) {
       int rows = A->rows;
       int columns = A->columns;
-      matrixS = s21_create_matrix(rows, columns);
+      matrixS = create_matrix(rows, columns);
 
       for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
@@ -109,8 +109,8 @@ matrix_t s21_mult_number(matrix_t *A, double number) {
   return matrixS;
 }
 
-matrix_t s21_mult_matrix(matrix_t *A, matrix_t *B) {
-  matrix_t matrixS = s21_create_matrix(0, 0);
+matrix_t mult_matrix(matrix_t *A, matrix_t *B) {
+  matrix_t matrixS = create_matrix(0, 0);
 
   if (A != NULL && B != NULL) {
     if (check_type_matrix(A) && check_type_matrix(B)) {
@@ -118,7 +118,7 @@ matrix_t s21_mult_matrix(matrix_t *A, matrix_t *B) {
         int rows = A->rows;
         int columns = B->columns;
         double res = 0;
-        matrixS = s21_create_matrix(rows, columns);
+        matrixS = create_matrix(rows, columns);
 
         for (int i = 0; i < rows; i++) {
           for (int j = 0; j < columns; j++) {
@@ -139,14 +139,14 @@ matrix_t s21_mult_matrix(matrix_t *A, matrix_t *B) {
   return matrixS;
 }
 
-matrix_t s21_transpose(matrix_t *A) {
-  matrix_t matrixS = s21_create_matrix(0, 0);
+matrix_t transpose(matrix_t *A) {
+  matrix_t matrixS = create_matrix(0, 0);
 
   if (A != NULL) {
     if (check_type_matrix(A)) {
       int rows = A->rows;
       int columns = A->columns;
-      matrixS = s21_create_matrix(A->columns, A->rows);
+      matrixS = create_matrix(A->columns, A->rows);
 
       for (int i = 0; i < columns; i++) {
         for (int j = 0; j < rows; j++) {
@@ -161,15 +161,15 @@ matrix_t s21_transpose(matrix_t *A) {
   return matrixS;
 }
 
-matrix_t s21_calc_complements(matrix_t *A) {
-  matrix_t matrixS = s21_create_matrix(0, 0);
+matrix_t calc_complements(matrix_t *A) {
+  matrix_t matrixS = create_matrix(0, 0);
 
   if (A != NULL) {
     if (check_type_matrix(A)) {
       if (is_square_matrix(A)) {
         int rows = A->rows;
         int columns = A->columns;
-        matrixS = s21_create_matrix(A->rows, A->columns);
+        matrixS = create_matrix(A->rows, A->columns);
 
         for (int i = 0; i < rows; i++) {
           for (int j = 0; j < columns; j++) {
@@ -178,7 +178,7 @@ matrix_t s21_calc_complements(matrix_t *A) {
         }
 
         if (A->columns == 1 && A->rows == 1) {
-          matrixS = s21_create_matrix(1, 1);
+          matrixS = create_matrix(1, 1);
           matrixS.matrix[0][0] = 1;
         }
 
@@ -190,19 +190,19 @@ matrix_t s21_calc_complements(matrix_t *A) {
   return matrixS;
 }
 
-matrix_t s21_inverse_matrix(matrix_t *A) {
-  matrix_t matrixSRes = s21_create_matrix(0, 0);
+matrix_t inverse_matrix(matrix_t *A) {
+  matrix_t matrixSRes = create_matrix(0, 0);
 
   if (A != NULL) {
     if (check_type_matrix(A)) {
-      if (s21_determinant(A) != 0) {
+      if (determinant(A) != 0) {
         if (is_square_matrix(A)) {
-          matrix_t complemetsMatrixS = s21_calc_complements(A);
-          matrix_t matrixS = s21_transpose(&complemetsMatrixS);
-          matrixSRes = s21_mult_number(&matrixS, 1/s21_determinant(A));
+          matrix_t complemetsMatrixS = calc_complements(A);
+          matrix_t matrixS = transpose(&complemetsMatrixS);
+          matrixSRes = mult_number(&matrixS, 1/determinant(A));
 
-          s21_remove_matrix(&complemetsMatrixS);
-          s21_remove_matrix(&matrixS);
+          remove_matrix(&complemetsMatrixS);
+          remove_matrix(&matrixS);
 
           set_type_matrix(&matrixSRes);
         }
@@ -213,7 +213,7 @@ matrix_t s21_inverse_matrix(matrix_t *A) {
   return matrixSRes;
 }
 
-double s21_determinant(matrix_t *A) {
+double determinant(matrix_t *A) {
   double result = NAN;
 
   if (A != NULL) {
@@ -224,7 +224,7 @@ double s21_determinant(matrix_t *A) {
         if (A->rows == 2) {
           result += A->matrix[0][0] * A->matrix[1][1] - A->matrix[0][1] * A->matrix[1][0];
         } else if (A->rows > 2) {
-          matrix_t matrixS = s21_create_matrix(A->rows - 1, A->columns - 1);
+          matrix_t matrixS = create_matrix(A->rows - 1, A->columns - 1);
 
           for (int col = 0; col < A->columns; col++) {
             for (int col2 = 0; col2 < A->columns - 1; col2++) {
@@ -235,10 +235,10 @@ double s21_determinant(matrix_t *A) {
               }
             }
 
-            result += pow(-1, (double)col) * A->matrix[0][col] * s21_determinant(&matrixS);
+            result += pow(-1, (double)col) * A->matrix[0][col] * determinant(&matrixS);
           }
 
-          s21_remove_matrix(&matrixS);
+          remove_matrix(&matrixS);
         }
       }
     }
@@ -254,9 +254,9 @@ matrix_t get_cropped_matrix(matrix_t *A, int x, int y) {
   int rows = A->rows, columns = A->columns;
 
   if (x >= rows || x < 0 || y >= columns || y < 0) {
-    matrixS = s21_create_matrix(0, 0);
+    matrixS = create_matrix(0, 0);
   } else {
-    matrixS = s21_create_matrix(rows - 1, columns - 1);
+    matrixS = create_matrix(rows - 1, columns - 1);
 
     for (int i = 0, iA = 0; i < matrixS.rows; i++, iA++) {
       if (iA == x) { iA++; }
@@ -282,9 +282,9 @@ double get_minor_elem(matrix_t *A, int x, int y) {
     res = NAN;
   } else {
     matrix_t croppedMatrixS = get_cropped_matrix(A, x, y);
-    res = s21_determinant(&croppedMatrixS);
+    res = determinant(&croppedMatrixS);
 
-    s21_remove_matrix(&croppedMatrixS);
+    remove_matrix(&croppedMatrixS);
   }
 
   return res;
@@ -294,7 +294,7 @@ int is_square_matrix(matrix_t *A) {
   return (A->rows == A->columns) ? SUCCESS : FAILURE;
 }
 
-int s21_eq_matrix(matrix_t *A, matrix_t *B) {
+int eq_matrix(matrix_t *A, matrix_t *B) {
   int isEqual = FAILURE;
 
   if (A != NULL && B != NULL) {
@@ -353,7 +353,7 @@ void set_type_matrix(matrix_t *A) {
   }
 }
 
-void s21_remove_matrix(matrix_t *A) {
+void remove_matrix(matrix_t *A) {
   if (A != NULL) {
     A->matrix_type = INCORRECT_MATRIX;
 
