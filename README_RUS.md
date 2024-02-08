@@ -5,7 +5,7 @@
 ### Создание матриц (create_matrix)
 
 ```c
-matrix_t s21_create_matrix(int rows, int columns);
+matrix_t create_matrix(int rows, int columns);
 ```
 
 Поле matrix_type должно инициализироваться значением ZERO_MATRIX.
@@ -13,7 +13,7 @@ matrix_t s21_create_matrix(int rows, int columns);
 ### Очистка матриц (remove_matrix)
 
 ```c
-void s21_remove_matrix(matrix_t *A);
+void remove_matrix(matrix_t *A);
 ```
 
 ### Сравнение матриц (eq_matrix)
@@ -22,7 +22,7 @@ void s21_remove_matrix(matrix_t *A);
 #define SUCCESS 1
 #define FAILURE 0
 
-int s21_eq_matrix(matrix_t *A, matrix_t *B);
+int eq_matrix(matrix_t *A, matrix_t *B);
 ```
 
 Две матрицы A, B совпадают |A = B|, если совпадают их размеры и соответствующие элементы равны, то есть при всех i, j A(i,j) = B(i,j).
@@ -32,8 +32,8 @@ int s21_eq_matrix(matrix_t *A, matrix_t *B);
 ### Сложение (sum_matrix) и вычитание матриц (sub_matrix)
 
 ```c
-matrix_t s21_sum_matrix(matrix_t *A, matrix_t *B);
-matrix_t s21_sub_matrix(matrix_t *A, matrix_t *B);
+matrix_t sum_matrix(matrix_t *A, matrix_t *B);
+matrix_t sub_matrix(matrix_t *A, matrix_t *B);
 ```
 
 Суммой двух матриц A = m × n и B = m × n одинаковых размеров называется матрица C = m × n = A + B тех же размеров, элементы которой определяются равенствами C(i,j) = A(i,j) + B(i,j).
@@ -49,8 +49,8 @@ matrix_t s21_sub_matrix(matrix_t *A, matrix_t *B);
 ### Умножение матрицы на число (mult_number). Умножение двух матриц (mult_matrix)
 
 ```c
-matrix_t s21_mult_number(matrix_t *A, double number);
-matrix_t s21_mult_matrix(matrix_t *A, matrix_t *B);
+matrix_t mult_number(matrix_t *A, double number);
+matrix_t mult_matrix(matrix_t *A, matrix_t *B);
 ```
 
 Произведением матрицы A = m × n на число λ называется матрица B = m × n = λ × A, элементы которой определяются равенствами B = λ × A(i,j).
@@ -86,7 +86,7 @@ C(3,3) = A(3,1) × B(1,3) + A(3,2) × B(2,3) = 3 × 1 + 6 × 4 = 3 + 24 = 27
 ### Транспонирование матрицы (transpose)
 
 ```c
-matrix_t s21_transpose(matrix_t *A);
+matrix_t transpose(matrix_t *A);
 ```
 
 Транспонирование матрицы А заключается в замене строк этой матрицы ее столбцами с сохранением их номеров.
@@ -100,7 +100,7 @@ A = A^T = 2 5 = 4 5 6
 ### Минор матрицы и матрица алгебраических дополнений (calc_complements)
 
 ```c
-matrix_t s21_calc_complements(matrix_t *A);
+matrix_t calc_complements(matrix_t *A);
 ```
 
 Минором M(i,j) называется определитель (n-1)-го порядка, полученный вычёркиванием из матрицы A i-й стройки и j-го столбца.
@@ -143,7 +143,7 @@ M. =  4 -14   8
 ### Определитель матрицы (determinant)
 
 ```c
-double s21_determinant(matrix_t *A);
+double determinant(matrix_t *A);
 ```
 
 Определитель (детерминант) - это число, которое ставят в соответствие каждой квадратной матрице и вычисляют из элементов по специальным формулам. \
@@ -169,7 +169,7 @@ A = 4 5 6
 ### Обратная матрица (inverse_matrix)
 
 ```c
-matrix_t s21_inverse_matrix(matrix_t *A);
+matrix_t inverse_matrix(matrix_t *A);
 ```
 
 Матрицу A в степени -1 называют обратной к квадратной матрице А, если произведение этих матриц равняется единичной матрице.
@@ -251,8 +251,8 @@ typedef struct matrix_struct {
 
 Реализованы основные действия с матрицами: _create_matrix_(создание), _remove_matrix_(очистка и уничтожение), _eq_matrix_(сравнение), _sum_matrix_(сложение), _sub_matrix_(вычитание), _mult_matrix_(умножение), _mult_number_(умножение на число), _transpose_(транспонирование), _determinant_(вычисление определителя), _calc_complements_(вычисление матрицы алгребраический дополнений), _inverse_matrix_(поиск обратной матрицы). 
 
-- Библиотека разработана на языке C стандарта C11 с использованием компиятора gcc 
-- Не использованы устаревшие и выведенные из употребления конструкции языка и библиотечные функции. Обращено внимание на пометки legacy и obsolete в официальной документации по языку и используемым библиотекам. При разоработке был взят ориентир на стандарт: POSIX.1-2017
+- Библиотека разработана на языке C стандарта C11 с использованием компилятора gcc 
+- Не использованы устаревшие и выведенные из употребления конструкции языка и библиотечные функции. Обращено внимание на пометки legacy и obsolete в официальной документации по языку и используемым библиотекам. При разработке был взят ориентир на стандарт: POSIX.1-2017
 - Решение оформлено как статическая библиотека
 - Библиотека разработана в соответствии с принципами структурного программирования
 - Матрица реализована в виде структуры описанной [выше](#структура-матрицы-на-языке-c) 
